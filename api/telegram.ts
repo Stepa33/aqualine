@@ -249,7 +249,7 @@ async function dayList(c: Ctx, plus: number) {
   const { data } = await db().from('bookings').select('starts_at, service_name, client_name, client_phone, car, status, boxes(name)')
     .eq('studio_id', c.b.studio.id).gte('starts_at', zoned(c.b.hours, d, 0)).lt('starts_at', zoned(c.b.hours, addDays(d, 1), 0))
     .in('status', ['new', 'accepted', 'done']).order('starts_at');
-  const l = (data ?? []) as { starts_at: string; service_name: string; client_name: string; client_phone: string; car: string; status: string; boxes: { name: string } | null }[];
+  const l = (data ?? []) as unknown as { starts_at: string; service_name: string; client_name: string; client_phone: string; car: string; status: string; boxes: { name: string } | { name: string }[] | null }[];
   if (!l.length) return `${plus ? 'Завтра' : 'Сегодня'} записей нет.`;
-  return `<b>${plus ? 'Завтра' : 'Сегодня'}, ${dTxt(d)}</b>\n${l.map((x) => `• ${when(x.starts_at, c.b.hours.tz).slice(-5)} ${esc(x.boxes?.name ?? '')} — ${esc(x.service_name)}\n   ${esc(x.client_name)}, ${esc(x.client_phone)}, ${esc(x.car)}`).join('\n')}`;
+  return `<b>${plus ? 'Завтра' : 'Сегодня'}, ${dTxt(d)}</b>\n${l.map((x) => `• ${when(x.starts_at, c.b.hours.tz).slice(-5)} ${esc((Array.isArray(x.boxes) ? x.boxes[0]?.name : x.boxes?.name) ?? '')} — ${esc(x.service_name)}\n   ${esc(x.client_name)}, ${esc(x.client_phone)}, ${esc(x.car)}`).join('\n')}`;
 }
