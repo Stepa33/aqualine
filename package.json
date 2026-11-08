@@ -1,0 +1,45 @@
+{
+  "name": "aqualine-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "tenant:new": "tsx scripts/tenant-new.ts",
+    "tenant:check": "tsx scripts/tenant-check.ts",
+    "tenant:publish": "tsx scripts/tenant-publish.ts",
+    "tg:setup": "tsx scripts/telegram-setup.ts"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@supabase/supabase-js": "^2.45.4",
+    "@tanstack/react-query": "^5.59.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "openai": "^4.67.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vercel/node": "^3.2.20",
+    "@vitejs/plugin-react": "^4.3.2",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9",
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^2.1.3",
+    "workbox-window": "^7.1.0"
+  }
+}
